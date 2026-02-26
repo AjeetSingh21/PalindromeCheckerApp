@@ -1,24 +1,20 @@
+// File: UseCase3PalindromeCheckerApp.java
+
+import java.util.Scanner;
+
 public class PalindromeCheckerApp
 {
     public static void main(String[] args) {
-        String str = "madambng";
-        int i = 0;
-        int j = str.length() - 1;
-        boolean isPalindrome = true;
-
-        while (i < j) {
-            if (str.charAt(i) != str.charAt(j)) {
-                isPalindrome = false;
-                break;
-            }
-            i++;
-            j--;
-        }
-
-        if (isPalindrome) {
-            System.out.println("Palindrome.");
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a string to check if it's a palindrome: ");
+        String original = scanner.nextLine();
+        StringBuilder sb = new StringBuilder(original);
+        String reversed = sb.reverse().toString();
+        if (original.equals(reversed)) {
+            System.out.println("Palindrome");
         } else {
-            System.out.println("Not a palindrome.");
+            System.out.println("Not a palindrome");
         }
+        scanner.close();
     }
 }

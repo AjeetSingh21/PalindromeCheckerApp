@@ -1,28 +1,50 @@
-// File: UseCase7PalindromeCheckerApp.java
+// File: UseCase8PalindromeCheckerApp.java
 
-import java.util.*;
+import java.util.Scanner;
 
 public class PalindromeCheckerApp {
+
+    static class Node {
+        char data;
+        Node next;
+        Node(char data) {
+            this.data = data;
+        }
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
-
-        Deque<Character> deque = new LinkedList<>();
+        Node head = null, tail = null;
         for (char c : input.toCharArray()) {
-            deque.add(c);
+            Node node = new Node(c);
+            if (head == null) {
+                head = node;
+                tail = node;
+            } else {
+                tail.next = node;
+                tail = node;
+            }
         }
 
+        Node slow = head, fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        Node secondHalf = reverse(slow);
+        Node firstHalf = head;
         boolean isPalindrome = true;
 
-        while (deque.size() > 1) {
-            char front = deque.removeFirst();
-            char rear = deque.removeLast();
-            if (front != rear) {
+        while (secondHalf != null) {
+            if (firstHalf.data != secondHalf.data) {
                 isPalindrome = false;
                 break;
             }
+            firstHalf = firstHalf.next;
+            secondHalf = secondHalf.next;
         }
 
         if (isPalindrome) {
@@ -32,5 +54,16 @@ public class PalindromeCheckerApp {
         }
 
         scanner.close();
+    }
+
+    private static Node reverse(Node head) {
+        Node prev = null, current = head;
+        while (current != null) {
+            Node next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        return prev;
     }
 }

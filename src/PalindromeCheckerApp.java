@@ -1,6 +1,23 @@
-// File: UseCase10PalindromeCheckerApp.java
+// File: UseCase11PalindromeCheckerApp.java
 
 import java.util.Scanner;
+
+class PalindromeChecker {
+    public boolean checkPalindrome(String input) {
+        String normalized = input.replaceAll("\\s+", "").toLowerCase();
+        int start = 0;
+        int end = normalized.length() - 1;
+
+        while (start < end) {
+            if (normalized.charAt(start) != normalized.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+        return true;
+    }
+}
 
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
@@ -9,25 +26,13 @@ public class PalindromeCheckerApp {
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
-        String normalized = input.replaceAll("\\s+", "").toLowerCase();
+        PalindromeChecker checker = new PalindromeChecker();
+        boolean result = checker.checkPalindrome(input);
 
-        int start = 0;
-        int end = normalized.length() - 1;
-        boolean isPalindrome = true;
-
-        while (start < end) {
-            if (normalized.charAt(start) != normalized.charAt(end)) {
-                isPalindrome = false;
-                break;
-            }
-            start++;
-            end--;
-        }
-
-        if (isPalindrome) {
-            System.out.println("The string \"" + input + "\" is a palindrome (ignoring case and spaces).");
+        if (result) {
+            System.out.println("The string \"" + input + "\" is a palindrome.");
         } else {
-            System.out.println("The string \"" + input + "\" is NOT a palindrome (ignoring case and spaces).");
+            System.out.println("The string \"" + input + "\" is NOT a palindrome.");
         }
 
         scanner.close();

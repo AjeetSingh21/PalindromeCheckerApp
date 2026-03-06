@@ -1,3 +1,5 @@
+// File: UseCase4PalindromeCheckerApp.java
+
 import java.util.Scanner;
 
 public class PalindromeCheckerApp {
@@ -9,10 +11,8 @@ public class PalindromeCheckerApp {
         String input = scanner.nextLine();
 
         char[] chars = input.toCharArray();
-
         int start = 0;
         int end = chars.length - 1;
-
         boolean isPalindrome = true;
 
         while (start < end) {

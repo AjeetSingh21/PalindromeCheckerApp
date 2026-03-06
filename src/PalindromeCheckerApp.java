@@ -1,27 +1,32 @@
-// File: UseCase4PalindromeCheckerApp.java
+// File: UseCase6PalindromeCheckerApp.java
 
-import java.util.Scanner;
+import java.util.*;
 
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("=== UC4: Character Array Based Palindrome Checker ===");
+        System.out.println("=== UC6: Queue + Stack Based Palindrome Checker ===");
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
-        char[] chars = input.toCharArray();
-        int start = 0;
-        int end = chars.length - 1;
+        Queue<Character> queue = new LinkedList<>();
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : input.toCharArray()) {
+            queue.add(c);
+            stack.push(c);
+        }
+
         boolean isPalindrome = true;
 
-        while (start < end) {
-            if (chars[start] != chars[end]) {
+        while (!queue.isEmpty() && !stack.isEmpty()) {
+            char fromQueue = queue.remove();
+            char fromStack = stack.pop();
+            if (fromQueue != fromStack) {
                 isPalindrome = false;
                 break;
             }
-            start++;
-            end--;
         }
 
         if (isPalindrome) {
